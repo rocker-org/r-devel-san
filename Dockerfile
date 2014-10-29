@@ -80,7 +80,7 @@ RUN cd /tmp/R-devel \
    ./configure --enable-R-shlib \
                --without-blas \
                --without-lapack \
-               --without-readline \
+               --with-readline \
                --without-recommended-packages \
                --program-suffix=dev \
                --disable-openmp \
