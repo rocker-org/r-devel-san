@@ -75,6 +75,7 @@ RUN cd /tmp/R-devel \
    CXXFLAGS="-pipe -Wall -pedantic -O3" \
    CC="gcc -fsanitize=address,undefined" \
    CXX="g++ -fsanitize=address,undefined" \
+   CXX1X="g++ -fsanitize=address,undefined" \
    FC="gfortran -fsanitize=address,undefined" \
    F77="gfortran -fsanitize=address,undefined" \
    ./configure --enable-R-shlib \
