@@ -49,6 +49,7 @@ RUN apt-get update -qq \
    texlive-latex-extra \
    texlive-latex-recommended \
    tk8.5-dev \
+   valgrind \
    x11proto-core-dev \
    xauth \
    xdg-utils \
