@@ -1,0 +1,49 @@
+(taken from http://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt on 2015 Dec 22)
+
+
+Tests of memory access errors, on x86_64 Linux (currently Fedora 22).
+
+How to run and interpret these (with links to further information) is in Â§4.3 of 'Writing R Extensions'.  The settings used are listed by sub-directory in the rest of this file.
+
+clang-ASAN, clang-UBSAN:
+Using clang 3.7.1 built with libc++/libcxxabi, and configured with
+--with-clang-default-openmp-runtime=libomp.
+(A patch from clang trunk is used to allow TPmsm to compile.)
+config.site:
+CC="clang -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero -fno-omit-frame-pointer"
+CXX="clang++ -stdlib=libc++ -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero -fno-omit-frame-pointer"
+CFLAGS="-g -O3 -Wall -pedantic -mtune=native"
+FFLAGS="-g -O2 -mtune=native"
+FCFLAGS="-g -O2 -mtune=native" 
+CXXFLAGS="-g -O3 -Wall -pedantic -mtune=native"
+MAIN_LD="clang++ -stdlib=libc++ -fsanitize=undefined,address"
+R_OPENMP_CFLAGS=-fopenmp
+
+and environment variable
+setenv ASAN_OPTIONS 'detect_leaks=0:detect_odr_violation=0'
+
+gcc-ASAN, gcc-UBSAN:
+gcc 5.3 with config.site:
+CFLAGS="-g -O2 -Wall -pedantic -mtune=native -fsanitize=address"
+FFLAGS="-g -O2 -mtune=native"
+FCFLAGS="-g -O2 -mtune=native"
+CXXFLAGS="-g -O2 -Wall -pedantic -mtune=native"
+MAIN_LDFLAGS=-fsanitize=address,undefined
+
+~/.R/Makevars:
+CC = gcc -std=gnu99 -fsanitize=address,undefined -fno-omit-frame-pointer
+CXX = g++ -std=c++11 -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize=object-size,vptr
+CXX1X = g++ -std=c++11 -fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize=object-size,vptr
+F77 = gfortran -fsanitize=address
+FC = gfortran -fsanitize=address
+FCFLAGS = -g -O2 -mtune=native -fbounds-check
+FFLAGS = -g -O2 -mtune=native -fbounds-check
+
+and environment variable
+setenv ASAN_OPTIONS 'detect_leaks=0:detect_odr_violation=0'
+
+
+valgrind:
+Running R CMD check --use-valgrind with an instrumented (level 2) build
+of R using gcc 5.3.
+
