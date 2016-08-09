@@ -97,6 +97,10 @@ RUN echo "R_LIBS=\${R_LIBS-'/usr/local/lib/R/site-library:/usr/local/lib/R/libra
 ## Set default CRAN repo
 RUN echo 'options("repos"="http://cloud.r-project.org")' >> /usr/local/lib/R/etc/Rprofile.site
 
+## More verbose UBSAN/SAN output (cf #3) -- this is still somewhat speculative
+## Entry copied from Prof Ripley's setup described at http://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt
+ENV ASAN_OPTIONS 'alloc_dealloc_mismatch=0:detect_leaks=0:detect_odr_violation=0' 
+
 RUN cd /usr/local/bin \
 	&& mv R Rdevel \
 	&& mv Rscript Rscriptdevel \
