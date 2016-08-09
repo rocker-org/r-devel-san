@@ -38,7 +38,7 @@ RUN apt-get update -qq \
 		libxt-dev \
 		mpack \
 		subversion \
-		tcl8.5-dev \
+		tcl8.6-dev \
 		texinfo \
 		texlive-base \
 		texlive-extra-utils \
@@ -48,7 +48,7 @@ RUN apt-get update -qq \
 		texlive-latex-base \
 		texlive-latex-extra \
 		texlive-latex-recommended \
-		tk8.5-dev \
+		tk8.6-dev \
 		valgrind \
 		x11proto-core-dev \
 		xauth \
@@ -95,7 +95,7 @@ RUN cd /tmp/R-devel \
 RUN echo "R_LIBS=\${R_LIBS-'/usr/local/lib/R/site-library:/usr/local/lib/R/library:/usr/lib/R/library'}" >> /usr/local/lib/R/etc/Renviron
 
 ## Set default CRAN repo
-RUN echo 'options("repos"="http://cran.rstudio.com")' >> /usr/local/lib/R/etc/Rprofile.site
+RUN echo 'options("repos"="http://cloud.r-project.org")' >> /usr/local/lib/R/etc/Rprofile.site
 
 RUN cd /usr/local/bin \
 	&& mv R Rdevel \
