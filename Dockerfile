@@ -62,6 +62,7 @@ RUN cd /tmp \
 	&& svn co https://svn.r-project.org/R/trunk R-devel 
 
 ## Build and install according the standard 'recipe' I emailed/posted years ago
+## Updated compiler flags to match https://www.stats.ox.ac.uk/pub/bdr/memtests/README.txt
 RUN cd /tmp/R-devel \
 	&& R_PAPERSIZE=letter \
 	   R_BATCHSAVE="--no-save --no-restore" \
@@ -73,11 +74,14 @@ RUN cd /tmp/R-devel \
 	   R_PRINTCMD=/usr/bin/lpr \
 	   LIBnn=lib \
 	   AWK=/usr/bin/awk \
-	   CFLAGS="-pipe -std=gnu99 -Wall -pedantic -O3" \
-	   CXXFLAGS="-pipe -Wall -pedantic -O3" \
-	   CC="gcc -fsanitize=address,undefined" \
-	   CXX="g++ -fsanitize=address,undefined" \
-	   CXX1X="g++ -fsanitize=address,undefined" \
+	   CFLAGS="-pipe -Wall -pedantic -O2 -mtune=native -fsanitize=address" \
+	   FFLAGS="-pipe -O2 -mtune=native -fbounds-check" \
+	   FCFLAGS="-pipe -O2 -mtune=native -fbounds-check" \
+	   CXXFLAGS="-pipe -Wall -pedantic -O2 -mtune=native" \
+           MAIN_LDFLAGS="-fsanitize=address,undefined" \
+           CC="gcc -std=gnu99 -fsanitize=address,undefined -fno-omit-frame-pointer" \
+	   CXX="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
+           CXX1X="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
 	   FC="gfortran -fsanitize=address,undefined" \
 	   F77="gfortran -fsanitize=address,undefined" \
 	   ./configure --enable-R-shlib \
