@@ -75,15 +75,15 @@ RUN cd /tmp/R-devel \
 	   LIBnn=lib \
 	   AWK=/usr/bin/awk \
 	   CFLAGS="-pipe -Wall -pedantic -O2 -mtune=native -fsanitize=address" \
-	   FFLAGS="-pipe -O2 -mtune=native -fbounds-check" \
-	   FCFLAGS="-pipe -O2 -mtune=native -fbounds-check" \
+	   FFLAGS="-pipe -O2 -mtune=native" \
+	   FCFLAGS="-pipe -O2 -mtune=native" \
 	   CXXFLAGS="-pipe -Wall -pedantic -O2 -mtune=native" \
            MAIN_LDFLAGS="-fsanitize=address,undefined" \
            CC="gcc -std=gnu99 -fsanitize=address,undefined -fno-omit-frame-pointer" \
 	   CXX="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
            CXX1X="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
-	   FC="gfortran -fsanitize=address,undefined" \
-	   F77="gfortran -fsanitize=address,undefined" \
+	   FC="gfortran" \
+	   F77="gfortran" \
 	   ./configure --enable-R-shlib \
                --without-blas \
                --without-lapack \
