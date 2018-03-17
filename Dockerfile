@@ -74,23 +74,24 @@ RUN cd /tmp/R-devel \
 	   R_PRINTCMD=/usr/bin/lpr \
 	   LIBnn=lib \
 	   AWK=/usr/bin/awk \
-	   CFLAGS="-pipe -Wall -pedantic -O2 -mtune=native -fsanitize=address" \
-	   FFLAGS="-pipe -O2 -mtune=native" \
-	   FCFLAGS="-pipe -O2 -mtune=native" \
-	   CXXFLAGS="-pipe -Wall -pedantic -O2 -mtune=native" \
-           MAIN_LDFLAGS="-fsanitize=address,undefined" \
-           CC="gcc -std=gnu99 -fsanitize=address,undefined -fno-omit-frame-pointer" \
-	   CXX="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
-           CXX1X="g++ -fsanitize=address,undefined,bounds-strict -fno-omit-frame-pointer -fno-sanitize=object-size,vptr" \
-	   FC="gfortran" \
-	   F77="gfortran" \
+	   CC="gcc -std=gnu99 -fsanitize=undefined -fno-omit-frame-pointer" \
+	   FFLAGS="-g -O2 -mtune=native" \
+	   FCFLAGS="-g -O2 -mtune=native" \
+	   CXX="g++ -fsanitize=undefined,bounds-strict -fno-omit-frame-pointer" \
+	   CXXFLAGS="-g -O2 -Wall -pedantic -mtune=native" \
+	   CXXSTD=-std=gnu++98 \
+	   MAIN_LDFLAGS="-fsanitize=undefined -pthread" \
+	   F77="gfortran -fsanitize=undefined" \
+	   FC="gfortran -fsanitize=undefined" \
+	   FCFLAGS="-g -O2 -mtune=native" \
+	   FFLAGS="-g -O2 -mtune=native" \
 	   ./configure --enable-R-shlib \
-               --without-blas \
-               --without-lapack \
-               --with-readline \
-               --without-recommended-packages \
-               --program-suffix=dev \
-               --disable-openmp \
+	       --without-blas \
+	       --without-lapack \
+	       --with-readline \
+	       --without-recommended-packages \
+	       --program-suffix=dev \
+	       --disable-openmp \
 	&& make \
 	&& make install \
 	&& make clean
