@@ -28,9 +28,9 @@ RUN apt-get update -qq \
 		libjpeg-dev \
 		liblapack-dev \
 		liblzma-dev \
-		libncurses5-dev \
+		libncurses-dev \
 		libpango1.0-dev \
-		libpcre3-dev \
+		libpcre2-dev \
 		libpng-dev \
 		libreadline-dev \
 		libtiff5-dev \
