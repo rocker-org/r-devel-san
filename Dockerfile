@@ -79,7 +79,9 @@ RUN cd /tmp/R-devel \
 	   FCFLAGS="-g -O2 -mtune=native" \
 	   CXX="g++ -fsanitize=undefined,bounds-strict -fno-omit-frame-pointer" \
 	   CXXFLAGS="-g -O2 -Wall -pedantic -mtune=native" \
-	   CXXSTD=-std=gnu++98 \
+	   CXX11FLAGS="-g -O2 -Wall -pedantic -mtune=native" \
+	   CXX14FLAGS="-g -O2 -Wall -pedantic -mtune=native" \
+	   CXX17FLAGS="-g -O2 -Wall -pedantic -mtune=native" \
 	   MAIN_LDFLAGS="-fsanitize=undefined -pthread" \
 	   F77="gfortran -fsanitize=undefined" \
 	   FC="gfortran -fsanitize=undefined" \
