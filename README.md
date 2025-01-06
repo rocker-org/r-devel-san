@@ -9,7 +9,11 @@ and to
 [Using the Undefined Behaviour Sanitizer](http://cran.r-project.org/doc/manuals/r-devel/R-exts.html#Using-Undefined-Behaviour-Sanitizer).
 
 Both require a particularly instrumented binary of R.  This repository
-provides a Docker container with such a binary, based on the R-devel sources.
+provides a Docker container with such a binary, based on the R-devel sources:
+
+* This particularly instrumented binary of `R` is available on the path as `Rdevel` and for convenience is also symbolically linked on the path as `RD`.
+* The particularly instrumented versions of `Rscript` on the path are `Rscriptdevel` with symbolic link `RDscript` for convenience.
+* The `R` and `Rscript` binaries in the path of this container are inherited from the `r-base/latest` container and are **not** particularly instrumented with sanitizer support.
 
 ## Rocker-Org
 
