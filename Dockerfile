@@ -114,4 +114,4 @@ RUN cd /usr/local/bin \
 	&& ln -s Rdevel RD \
 	&& ln -s Rscriptdevel RDscript
 
-
+CMD ["bash"]
