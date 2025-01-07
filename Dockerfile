@@ -3,17 +3,18 @@
 ## start with the Docker 'base R' Debian-based image
 FROM r-base:latest
 
-## This handle reaches Carl and Dirk
-LABEL org.opencontainers.image.authors="Carl Boettiger and Dirk Eddelbuettel <rocker-maintainers@eddelbuettel.com>"
-
+LABEL org.label-schema.license="GPL-2.0" \
+      org.label-schema.vcs-url="https://github.com/rocker-org/" \
+      org.label-schema.vendor="Rocker Project" \
+      maintainer="Dirk Eddelbuettel <edd@debian.org>"
 
 ## Remain current
-RUN apt-get update -qq \
-	&& apt-get dist-upgrade -y
+RUN apt update -qq \
+	&& apt dist-upgrade -y
 
 ## From the Build-Depends of the Debian R package, plus subversion
-RUN apt-get update -qq \
-	&& apt-get install -t unstable -y --no-install-recommends \
+RUN apt update -qq \
+	&& apt install -t unstable -y --no-install-recommends \
 		bash-completion \
 		bison \
 		debhelper \
