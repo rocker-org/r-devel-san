@@ -76,7 +76,7 @@ RUN cd /tmp/R-devel \
 	   R_PRINTCMD=/usr/bin/lpr \
 	   LIBnn=lib \
 	   AWK=/usr/bin/awk \
-	   CC="gcc -std=gnu99 -fsanitize=undefined -fno-omit-frame-pointer" \
+	   CC="gcc -std=gnu99 -fsanitize=undefined,bounds-strict -fno-omit-frame-pointer" \
 	   FFLAGS="-g -O2 -mtune=native" \
 	   FCFLAGS="-g -O2 -mtune=native" \
 	   CXX="g++ -fsanitize=undefined,bounds-strict -fno-omit-frame-pointer" \
